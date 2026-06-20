@@ -12,7 +12,6 @@ export function Hero() {
           alt="Премиальный дом с архитектурной вечерней подсветкой и светопрозрачными конструкциями"
           className="h-full w-full object-cover opacity-50"
           loading="eager"
-          fetchpriority="high"
         />
         {/* Затемнение для читаемости текста */}
         <div className="absolute inset-0 bg-gradient-to-r from-ink via-ink/85 to-ink/40" />
