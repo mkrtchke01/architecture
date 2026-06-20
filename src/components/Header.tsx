@@ -27,39 +27,53 @@ export function Header() {
         scrolled ? 'border-b border-line bg-ink/85 backdrop-blur-md' : 'border-b border-transparent'
       }`}
     >
-      <div className="container-x flex h-20 items-center justify-between">
+      <div className="container-x flex h-20 items-center justify-between gap-6">
         {/* Логотип. TODO: заменить на реальный логотип (SVG) */}
-        <a href="#hero" className="group flex flex-col leading-none" aria-label={`${site.brand} — на главную`}>
+        <a
+          href="#hero"
+          className="group flex shrink-0 flex-col leading-none"
+          aria-label={`${site.brand} — на главную`}
+        >
           <span className="font-display text-2xl font-semibold tracking-wide text-bone">
             {site.brand}
           </span>
-          <span className="mt-0.5 text-[10px] uppercase tracking-widest2 text-mist-dim">
+          <span className="mt-1 whitespace-nowrap text-[10px] uppercase tracking-[0.18em] text-mist-dim">
             {site.brandTagline}
           </span>
         </a>
 
         {/* Десктоп-навигация */}
-        <nav className="hidden items-center gap-8 lg:flex" aria-label="Основная навигация">
+        <nav
+          className="hidden items-center gap-7 xl:flex 2xl:gap-9"
+          aria-label="Основная навигация"
+        >
           {site.nav.map((item) => (
-            <a key={item.href} href={item.href} className="text-sm text-mist transition-colors hover:text-bone">
+            <a
+              key={item.href}
+              href={item.href}
+              className="whitespace-nowrap text-sm text-mist transition-colors hover:text-bone"
+            >
               {item.label}
             </a>
           ))}
         </nav>
 
-        <div className="hidden items-center gap-4 lg:flex">
-          <a href={site.phoneHref} className="text-sm font-medium text-bone hover:text-brass">
+        <div className="hidden shrink-0 items-center gap-5 xl:flex">
+          <a
+            href={site.phoneHref}
+            className="whitespace-nowrap text-sm font-medium text-bone transition-colors hover:text-brass"
+          >
             {site.phone}
           </a>
-          <a href="#contact" className="btn-primary text-sm">
+          <a href="#contact" className="btn-primary whitespace-nowrap text-sm">
             Получить консультацию
           </a>
         </div>
 
-        {/* Бургер для мобильных */}
+        {/* Бургер для мобильных и средних экранов */}
         <button
           type="button"
-          className="flex h-11 w-11 items-center justify-center rounded-full border border-line text-bone lg:hidden"
+          className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-line text-bone xl:hidden"
           aria-label={open ? 'Закрыть меню' : 'Открыть меню'}
           aria-expanded={open}
           onClick={() => setOpen((v) => !v)}
@@ -86,7 +100,7 @@ export function Header() {
 
       {/* Мобильное меню */}
       <div
-        className={`overflow-hidden border-t border-line bg-ink/95 backdrop-blur-md transition-[max-height] duration-500 lg:hidden ${
+        className={`overflow-hidden border-t border-line bg-ink/95 backdrop-blur-md transition-[max-height] duration-500 xl:hidden ${
           open ? 'max-h-[480px]' : 'max-h-0'
         }`}
       >
