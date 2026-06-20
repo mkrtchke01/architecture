@@ -1,0 +1,131 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    /* отступ под фиксированный хедер при якорной навигации */
+    scroll-padding-top: 96px;
+  }
+
+  body {
+    @apply bg-ink text-bone font-sans antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Доступность: видимый фокус для клавиатурной навигации */
+  :focus-visible {
+    outline: 2px solid theme('colors.brass');
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  ::selection {
+    background: theme('colors.brass');
+    color: theme('colors.ink');
+  }
+
+  /* Аккуратный скроллбар */
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: theme('colors.ink');
+  }
+  ::-webkit-scrollbar-thumb {
+    background: theme('colors.surface-2');
+    border-radius: 999px;
+  }
+}
+
+@layer components {
+  .container-x {
+    @apply mx-auto w-full max-w-content px-5 sm:px-8 lg:px-12;
+  }
+
+  /* Надзаголовок-метка с латунной чертой */
+  .eyebrow {
+    @apply inline-flex items-center gap-3 text-xs font-medium uppercase tracking-widest2 text-brass;
+  }
+  .eyebrow::before {
+    content: '';
+    @apply h-px w-8 bg-brass/60;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-7 py-3.5 text-sm font-semibold
+           transition-all duration-300 focus:outline-none;
+  }
+  .btn-primary {
+    @apply btn bg-brass text-ink hover:bg-brass-soft hover:shadow-glow;
+  }
+  .btn-ghost {
+    @apply btn border border-line text-bone hover:border-brass/60 hover:text-brass;
+  }
+
+  /* Премиальная карточка-стекло */
+  .glass-card {
+    @apply rounded-2xl border border-line bg-surface/60 backdrop-blur-sm transition-all duration-500;
+  }
+  .glass-card:hover {
+    @apply border-brass/40 bg-surface-2/70 shadow-card;
+  }
+
+  .link-muted {
+    @apply text-mist transition-colors duration-200 hover:text-bone;
+  }
+}
+
+@layer utilities {
+  /* Reveal-анимация при появлении в зоне видимости */
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition:
+      opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform;
+  }
+  .reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .text-gradient-brass {
+    background: linear-gradient(120deg, theme('colors.brass-soft'), theme('colors.brass-deep'));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* Радиальное «свечение» для hero/CTA */
+  .glow-spot {
+    background: radial-gradient(
+      circle at center,
+      rgba(194, 163, 107, 0.22) 0%,
+      rgba(194, 163, 107, 0.06) 35%,
+      transparent 70%
+    );
+  }
+}
+
+/* Уважение к пользователям с reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  * {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
